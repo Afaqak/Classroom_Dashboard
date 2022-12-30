@@ -78,7 +78,7 @@ const UserAccounts = () => {
                     bg-green-500 rounded-md 
                     focus:outline-none focus:ring-2
                     focus:ring-green-500'
-                    focus:border-
+                    focus:border-transparent
               "
                     name="change type"
                     id=""
