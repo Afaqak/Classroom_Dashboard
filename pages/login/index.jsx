@@ -10,8 +10,7 @@ import FormInput from "../../components/formInput";
 const SignIn = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const notify = () =>
-    toast.success("Sign in successful! Redirecting to Dashboard...");
+  cp
   const userValues = {
     username: "",
     password: "",
@@ -49,6 +48,7 @@ const SignIn = () => {
           Back
         </Link>
         <h1>Online Classroom Dashboard</h1>
+        fdsf
         <p
           className=" 
         relative z-0
@@ -62,23 +62,21 @@ const SignIn = () => {
         </p>
       </div>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
+    
         className="bg-desaturatedDark py-4 px-4 rounded-md space-y-5 w-[300px] text-white
           
         "
       >
         <FormInput
           label="Email"
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
           name="username"
           type="text"
           placeholder="Email"
         />
         <FormInput
           label="Password"
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
           name="password"
           type="password"
           placeholder="Password"

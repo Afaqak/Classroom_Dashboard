@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FetchTypeGet } from "../../lib/utils";
-
+import { useEffect } from "react";
 const UserAccounts = () => {
   const [users, setUsers] = useState([]);
   const user = useSelector((state) => state.user.currentUser);
 
   const changeValidity = async (id, validity) => {
+    console.log(id, validity);
     if(!validity) return;
-    console.log(typeof id, validity);
+    validity=Boolean(validity);
+    console.log(validity);
     const res = await fetch(
       `https://vast-pink-moth-toga.cyclic.app/accounts/changeValidity/${id} `,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
-        body: JSON.stringify({ validity }),
+        body: JSON.stringify({valid:validity }),
       }
     );
     const data = await res.json();
-    console.log(data);
   };
 
   useEffect(() => {
@@ -60,7 +61,13 @@ const UserAccounts = () => {
                     <h1 className="ml-2">Batch : {user.batch}</h1>
                     <h1 className="ml-2">Program : {user.program}</h1>
                     <h1 className="ml-2">
-                      Type : {user.admin ? "Admin" : "User"}
+                      Admin : {user.admin ? "true" : "false"}
+                    </h1>
+                    <h1 className="ml-2">
+                      Teacher : {user.teacher ? "true" : "false"}
+                    </h1>
+                    <h1 className="ml-2">
+                      Valid : {user.valid ? "true" : "false"}
                     </h1>
                     </div>
                     <img 
@@ -74,6 +81,7 @@ const UserAccounts = () => {
                   <div className="px-2 py-2">
                   <select
                     onChange={(e) => changeValidity(user._id, e.target.value)}
+
                     className="appearance-none text-white px-2 py-1 w-full
                     bg-green-500 rounded-md 
                     focus:outline-none focus:ring-2
@@ -84,10 +92,10 @@ const UserAccounts = () => {
                     id=""
                   >
                     <option value="valid">select option</option>
-                    {user.admin ? (
-                      <option value="true">change to user</option>
+                    {user.valid ? (
+                      <option value="false">change to invalid</option>
                     ) : (
-                      <option value="true">change to admin</option>
+                      <option value="true">change to valid</option>
                     )}
                     {user.teacher ? (
                       <option value="true">change to user</option>
